@@ -1,0 +1,12 @@
+extends ../layout/main.pug
+
+block content
+    h3 Nổi bật hôm nay
+    ul
+      each article in articles
+        li 
+           div 
+              p 
+                a(href="#")
+                  strong #{article.title}
+              p #{article.content}
