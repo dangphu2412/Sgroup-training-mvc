@@ -2,5 +2,12 @@ extends ../layout/main.pug
 
 block content
     p Add new article
-    form(action="/articles", method="post") 
+    form(action="/articles", method="post")
+        label Title
+        input#title(type='text' name='title')
+        label Content
+        input#content(type='text' name='content')
         button Create
+
+block scripts
+    script(src='/js/article.js')
