@@ -1,13 +1,16 @@
 extends ../layout/main.pug
 
 block content
-    p Add new article
     form(action="/articles", method="post")
-        label Title
-        input#title(type='text' name='title')
-        label Content
-        input#content(type='text' name='content')
-        button Create
+        .form-group
+            label.form-label Title
+            input#title.form-control(type='text' name='title' aria-describedby='emailHelp')
+            #emailHelp.form-text We&apos;ll never share your email with anyone else.
+        .form-group
+            label Content
+            textarea#content.form-control(rows='3' name='content')
+        button.btn.btn-primary(type='submit') Create
+
 
 block scripts
     script(src='/js/article.js')
