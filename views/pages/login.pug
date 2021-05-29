@@ -1,0 +1,13 @@
+extends ../layout/main.pug
+
+block content
+    form(action='/login' method='post')
+        .mb-3
+            label.form-label(for='exampleInputEmail1') Email address
+            input.form-control(type='email' aria-describedby='emailHelp' name='email')
+            #emailHelp.form-text We&apos;ll never share your email with anyone else.
+        .mb-3
+            label.form-label(for='exampleInputPassword1') Password
+            input.form-control(type='password' name='password')
+        button.btn.btn-primary(type='submit') Submit
+

@@ -2,10 +2,13 @@ const express = require('express');
 const {join} = require('path');
 const slug = require('slugify');
 const methodOverride = require('method-override')
+const cookieParser = require('cookie-parser');
+const bcrypt = require('bcrypt');
 
 const database = require('./config/database');
 const Article = require('./model/article');
 const {PORT} = require('./env');
+const UserModel = require('./model/user');
 
 const PUBLIC_PATH = join(__dirname, 'public');
 
@@ -16,9 +19,17 @@ database();
 app.set('view engine', 'pug');
 app.set('views', join(__dirname, 'views'));
 
+app.use(cookieParser('fuspro123456'));
 app.use(express.urlencoded({ extended: false }))
-app.use(express.json())
-app.use(methodOverride('_method'))
+app.use(express.json());
+app.use(methodOverride(function (req, res) {
+    if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+      // look in urlencoded POST bodies and delete it
+      var method = req.body._method
+      delete req.body._method
+      return method
+    }
+  }))
 app.use(express.static(PUBLIC_PATH, {
     etag: true,
     cacheControl: true,
@@ -26,7 +37,10 @@ app.use(express.static(PUBLIC_PATH, {
 }));
 
 // Pages
+
+// Article pages
 app.get('/', async (req, res) => {
+    console.log(req.signedCookies);
     const articles = await Article.find().sort('-createdAt');
     return res.render('pages/home.pug', {
         articles
@@ -61,6 +75,11 @@ app.get('/articles/:slug', async (req, res) => {
     return res.render('pages/detail.pug', {
         article
     });
+})
+
+// Auth page
+app.get('/login' , (req, res) => {
+    return res.render('pages/login.pug')
 })
 
 // APIs
@@ -129,6 +148,34 @@ app.delete('/articles/:slug', async (req, res) => {
         });
     }
 
+    return res.redirect('/');
+})
+
+app.post('/login', async (req, res) => {
+    const user = await UserModel.findOne({
+        username: req.body.email
+    });
+
+    if (!user || !bcrypt.compareSync(req.body.password, user.password)) {
+        return res.render('pages/error.pug', {
+            error: `Email not found to login`
+        });
+    }
+
+    const userInfomation = {
+        id: user._id,
+        username: user.username
+    }
+
+    // , {
+    //     maxAge: 900000, 
+    //     httpOnly: true,
+    //     signed: true,
+    // }
+    res.cookie('user', userInfomation, {
+        httpOnly: true,
+        signed: true,
+    });
     return res.redirect('/');
 })
 

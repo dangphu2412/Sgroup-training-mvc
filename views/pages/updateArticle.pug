@@ -1,7 +1,8 @@
 extends ../layout/main.pug
 
 block content
-    form(action=`/articles/${article.slug}?_method=PUT`, method="post")
+    form(action=`/articles/${article.slug}`, method="post" enctype="application/x-www-form-urlencoded")
+        input(type="hidden" name="_method" value="PUT")
         .form-group
             label.form-label Title
             input#title.form-control(
