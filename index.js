@@ -18,7 +18,7 @@ app.set('views', join(__dirname, 'views'));
 
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
-app.use(methodOverride('X-HTTP-Method-Override'))
+app.use(methodOverride('_method'))
 app.use(express.static(PUBLIC_PATH, {
     etag: true,
     cacheControl: true,
@@ -87,10 +87,49 @@ app.post('/articles', async (req, res) => {
 })
 
 app.put('/articles/:slug', async (req, res) => {
-    // TODO: Handle logic update here
-    return res.render('pages/error.pug', {
-        error: `This article with title ${req.body.title} has been existed`
-    });
+    const {slug} = req.params;
+
+    const article = await Article.findOne({ slug });
+
+    if (!article) {
+        return res.render('pages/error.pug', {
+            error: `This article with title ${slug} is not exist`
+        });
+    }
+    
+    try {
+        await Article.updateOne({slug }, req.body);
+    } catch (error) {
+        console.log(error);
+        return res.render('pages/error.pug', {
+            error: `This article with title ${req.body.title} has been existed`
+        });
+    }
+
+    return res.redirect('/');
+})
+
+app.delete('/articles/:slug', async (req, res) => {
+    const {slug} = req.params;
+
+    const article = await Article.findOne({ slug });
+
+    if (!article) {
+        return res.render('pages/error.pug', {
+            error: `This article with title ${slug} is not exist`
+        });
+    }
+    
+    try {
+        await Article.deleteOne({slug });
+    } catch (error) {
+        console.log(error);
+        return res.render('pages/error.pug', {
+            error: `This article with title ${req.body.title} has been deleted`
+        });
+    }
+
+    return res.redirect('/');
 })
 
 app.listen(PORT, () => {
