@@ -3,11 +3,12 @@ const bcrypt = require('bcrypt');
 
 const ArticleModel = require('../model/article');
 const UserModel = require('../model/user');
+const { DB_CONNECTION } = require('../env');
 
 module.exports = async () => {
     try {
         const DEFAULT_PWD = bcrypt.hashSync('123456', 10);
-        await mongoose.connect('mongodb://localhost:27017/training', { 
+        await mongoose.connect(DB_CONNECTION, { 
             useNewUrlParser: true,
             useUnifiedTopology: true
         });
