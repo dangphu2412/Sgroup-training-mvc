@@ -1,6 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
-
+const UserModel = require('../../model/user');
+const SessionModel = require('../../model/session');
 const router = express.Router();
 
 // Auth page
@@ -19,19 +20,34 @@ router.post('/login', async (req, res) => {
         });
     }
 
+    const currentUserSession = await SessionModel.findOne({
+        'user._id': user._id
+    });
+
+    if (currentUserSession?.lock) {
+        return res.render('pages/error', {
+            error: 'Have some user using this account'
+        })
+    }
+
     const userInfomation = {
-        id: user._id,
+        _id: user._id,
         username: user.username
     }
 
-    // , {
-    //     maxAge: 900000, 
-    //     httpOnly: true,
-    //     signed: true,
-    // }
-    res.cookie('user', userInfomation, {
+    console.log(userInfomation);
+
+    const session = await SessionModel.create({
+        user: userInfomation,
+        lock: true
+    });
+
+    console.log(session);
+
+    res.cookie('user', session._id, {
         httpOnly: true,
         signed: true,
+        maxAge: 30 * 1000
     });
     return res.redirect('/');
 })
