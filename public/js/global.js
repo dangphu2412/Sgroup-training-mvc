@@ -1,14 +1,15 @@
 document.getElementById('logout').addEventListener('submit', function(event) {
     event.preventDefault();
-
-    window.fetch('/logout', {
-        method: 'DELETE',
-    }).then(res => {
-        console.log(res);
-
-        alert('Success')
-    }).catch(err => {
-        console.log(err);
-    })
+    const url = 'http://localhost:3000/auth/logout';
+    const deleteMethod = {
+        method: 'DELETE', // Method itself
+        headers: {
+         'Content-type': 'application/json; charset=UTF-8'
+        },
+       }
+    fetch(url, deleteMethod) 
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(err => console.log(err)) 
 
 })

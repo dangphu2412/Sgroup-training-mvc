@@ -78,11 +78,20 @@ router.post('/login', async (req, res) => {
 })
 
 router.delete('/logout', async (req, res) => {
+    console.log("Im logging out");
+    
     const { sessionId } = req.signedCookies;
-    await SessionModel.deleteOne({
-        _id: sessionId
-    })
-    return res.status(203);
+    console.log(sessionId);
+    
+    if (sessionId) {
+        await SessionModel.deleteOne({
+            _id: sessionId
+        })
+        return res.status(203).json({});
+    }
+    return res.status(200).json({
+        message: 'Can not logout'
+    });
 })
 
 export default router;
