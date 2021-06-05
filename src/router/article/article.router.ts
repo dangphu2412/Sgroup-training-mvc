@@ -1,9 +1,8 @@
 import express from 'express';
 import slug from 'slugify';
-const router = express.Router();
-
 import Article from '../../model/article';
 
+const router = express.Router();
 
 router.post('/', async (req, res) => {
     let createSuccess = true;

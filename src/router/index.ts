@@ -6,8 +6,8 @@ import Article from '../model/article';
 
 const router = express.Router();
 
-import articleRouter from './article';
-import authRouter from './auth';
+import articleRouter from './article/article.router';
+import authRouter from './auth/auth.router';
 
 // DEFAULT PAGE
 router.get('/', authRequired, async (req: Request, res: Response) => {

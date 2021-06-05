@@ -22,5 +22,6 @@ const envConfig = new EnvConfig();
 envConfig.set('PORT', process.env.PORT, 3000);
 envConfig.set('DB_CONNECTION', process.env.DB_CONNECTION);
 envConfig.set('COOKIE_SECRET', process.env.COOKIE_SECRET);
+envConfig.set('SESSION_EXPIRED', process.env.SESSION_EXPIRED, 1000 * 60);
 
 export { envConfig };

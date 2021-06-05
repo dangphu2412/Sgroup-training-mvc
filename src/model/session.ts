@@ -5,9 +5,8 @@ const SessionSchema = new Schema({
         _id: String,
         username: String
     },
-    lock: {
-        type: Boolean
-    }
+    lock: Boolean,
+    expired: Number
 });
 
 const SessionModel = model('sessions', SessionSchema);
