@@ -1,12 +1,8 @@
 import { NextFunction, Request, Response } from "express";
+import { SessionPayload } from "../dto/sessionPayload";
 import { envConfig } from "../env";
 
 import SessionModel from "../model/session";
-
-interface SessionPayload {
-	_id: string;
-	username: string;
-}
 
 interface ExtendedRequestWithUser extends Request {
 	user?: SessionPayload
@@ -41,7 +37,7 @@ export const authRequired =  async (req: Request, res: Response, next: NextFunct
 		return res.redirect('/auth/login');
 	}
 
-	if (Date.now() - currentUserSession.renewTime > 0) {
+	if (Date.now() - currentUserSession.renewTime < 0) {
 		await SessionModel.updateOne({
 			_id: sessionId
 		}, {
@@ -55,9 +51,9 @@ export const authRequired =  async (req: Request, res: Response, next: NextFunct
 };
 
 export const authNotRequired = (req: Request, res: Response, next: NextFunction) => {
-        const { sessionId } = req.signedCookies;
+	const { sessionId } = req.signedCookies;
 
-        if (sessionId) return res.redirect('/');
+	if (sessionId) return res.redirect('/');
 
-        return next();
+	return next();
 }

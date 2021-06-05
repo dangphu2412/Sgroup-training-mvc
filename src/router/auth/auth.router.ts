@@ -3,6 +3,8 @@ import bcrypt from 'bcrypt';
 import UserModel from '../../model/user';
 import SessionModel from '../../model/session';
 import { envConfig } from '../../env';
+import { SessionPayload } from '../../dto/sessionPayload';
+
 const router = express.Router();
 
 // Auth page
@@ -33,7 +35,7 @@ router.post('/login', async (req, res) => {
         'user._id': user._id
     });
 
-    const userInfomation = {
+    const userInfomation: SessionPayload = {
         _id: user._id,
         username: user.username
     }
@@ -50,7 +52,7 @@ router.post('/login', async (req, res) => {
         });
         sessionId = session._id;
     } else {
-        if (Date.now() - currentUserSession.expired > 0 || Date.now() - currentUserSession.renewTime) {
+        if (Date.now() - currentUserSession.expired > 0 || Date.now() - currentUserSession.renewTime > 0) {
             await SessionModel.deleteOne({
                 'user._id': user._id 
             })
