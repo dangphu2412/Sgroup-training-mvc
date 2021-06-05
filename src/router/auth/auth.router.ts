@@ -45,34 +45,42 @@ router.post('/login', async (req, res) => {
         
         const session = await SessionModel.create({
             user: userInfomation,
-            lock: true,
-            expired: Date.now() + envConfig.get('SESSION_EXPIRED')
+            expired: Date.now() + envConfig.get('SESSION_EXPIRED'),
+            renewTime: Date.now() + envConfig.get('SESSION_RENEW')
         });
         sessionId = session._id;
     } else {
-        if (currentUserSession.lock) {
-            return res.render('pages/error', {
-                error: 'You can not log in now. Your account is being used'
-            })
-        }
-        if (Date.now() - currentUserSession.expired > 0) {
+        if (Date.now() - currentUserSession.expired > 0 || Date.now() - currentUserSession.renewTime) {
             await SessionModel.deleteOne({
                 'user._id': user._id 
             })
+            console.log(`Deleting session with user id: ${user._id}`);
+            
             const session = await SessionModel.create({
                 user: userInfomation,
-                lock: true
+                expired: Date.now() + envConfig.get('SESSION_EXPIRED'),
+                renewTime: Date.now() + envConfig.get('SESSION_RENEW')
             });
             sessionId = session._id;
+        } else {
+            return res.redirect('/auth/login');
         }
     }
 
     res.cookie('sessionId', sessionId, {
         httpOnly: true,
         signed: true,
-        maxAge: 30 * 1000
+        maxAge: Date.now() + Number.parseInt(envConfig.get('SESSION_EXPIRED'))
     });
     return res.redirect('/');
+})
+
+router.delete('/logout', async (req, res) => {
+    const { sessionId } = req.signedCookies;
+    await SessionModel.deleteOne({
+        _id: sessionId
+    })
+    return res.status(203);
 })
 
 export default router;
