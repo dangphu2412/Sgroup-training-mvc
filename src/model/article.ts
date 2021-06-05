@@ -1,4 +1,5 @@
-const {model, Schema} = require('mongoose');
+import { model, Schema } from 'mongoose';
+import { updateHook } from './hooks/updateHook';
 
 const ArticleSchema = new Schema({
     title: String,
@@ -11,13 +12,8 @@ const ArticleSchema = new Schema({
         type: Date
     }
 });
-ArticleSchema.pre('save', function() {
-    if (!this.createdAt) {
-        this.createdAt = Date.now();
-    }
-    this.updatedAt = Date.now();
-});
+ArticleSchema.pre('save', updateHook);
 
 const ArticleModel = model('articles', ArticleSchema);
 
-module.exports = ArticleModel;
+export default ArticleModel;

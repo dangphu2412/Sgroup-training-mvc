@@ -1,14 +1,14 @@
-const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
+import mongoose from 'mongoose';
+import bcrypt from 'bcrypt';
 
-const ArticleModel = require('../model/article');
-const UserModel = require('../model/user');
-const { DB_CONNECTION } = require('../env');
+import ArticleModel from '../model/article';
+import UserModel from '../model/user';
+import { envConfig } from '../env';
 
-module.exports = async () => {
+export default async () => {
     try {
         const DEFAULT_PWD = bcrypt.hashSync('123456', 10);
-        await mongoose.connect(DB_CONNECTION, { 
+        await mongoose.connect(envConfig.get('DB_CONNECTION'), { 
             useNewUrlParser: true,
             useUnifiedTopology: true
         });

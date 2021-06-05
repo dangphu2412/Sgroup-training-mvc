@@ -1,7 +1,7 @@
-const express = require('express');
-const bcrypt = require('bcrypt');
-const UserModel = require('../../model/user');
-const SessionModel = require('../../model/session');
+import express from 'express';
+import bcrypt from 'bcrypt';
+import UserModel from '../../model/user';
+import SessionModel from '../../model/session';
 const router = express.Router();
 
 // Auth page
@@ -52,4 +52,4 @@ router.post('/login', async (req, res) => {
     return res.redirect('/');
 })
 
-module.exports = router;
+export default router;

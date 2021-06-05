@@ -1,7 +1,8 @@
-const express = require('express');
+import express from 'express';
+import slug from 'slugify';
 const router = express.Router();
 
-const Article = require('../../model/article');
+import Article from '../../model/article';
 
 
 router.post('/', async (req, res) => {
@@ -103,4 +104,4 @@ router.get('/:slug', async (req, res) => {
 })
 
 
-module.exports = router;
+export default router;

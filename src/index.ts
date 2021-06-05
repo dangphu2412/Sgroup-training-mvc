@@ -1,13 +1,13 @@
-const express = require('express');
-const {join} = require('path');
-const slug = require('slugify');
-const methodOverride = require('method-override')
-const cookieParser = require('cookie-parser');
+import { Request } from "express";
 
-const database = require('./config/database');
-const Article = require('./model/article');
-const {PORT, COOKIE_SECRET} = require('./env');
-const router = require('./router');
+import express from 'express';
+import { join } from 'path';
+import methodOverride from 'method-override';
+import cookieParser from 'cookie-parser';
+
+import database from './config/database';
+import router from './router';
+import { envConfig } from "./env";
 
 const ROOT_DIR = process.cwd();
 const PUBLIC_PATH = join(ROOT_DIR, 'public');
@@ -18,10 +18,10 @@ database();
 
 app.set('view engine', 'pug');
 app.set('views', VIEW_PATH);
-app.use(cookieParser(COOKIE_SECRET));
+app.use(cookieParser(envConfig.get('COOKIE_SECRET')));
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json());
-app.use(methodOverride(function (req, res) {
+app.use(methodOverride(function (req: Request) {
     if (req.body && typeof req.body === 'object' && '_method' in req.body) {
       // look in urlencoded POST bodies and delete it
       var method = req.body._method
@@ -37,6 +37,6 @@ app.use(express.static(PUBLIC_PATH, {
 
 app.use('/', router);
 
-app.listen(PORT, () => {
-    console.log(`Server is listening on ${PORT}`)
+app.listen(envConfig.get('PORT'), () => {
+    console.log(`Server is listening on ${envConfig.get('PORT')}`)
 });
