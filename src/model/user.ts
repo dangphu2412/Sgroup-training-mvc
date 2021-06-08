@@ -1,7 +1,14 @@
 import { model, Schema } from 'mongoose';
 import { updateHook } from './hooks/updateHook';
 
-const UserSchema = new Schema({
+export interface IUserSchema {
+    username: string,
+    password: string,
+    createdAt: Date,
+    updatedAt: Date
+}
+
+const UserSchema = new Schema<IUserSchema, any>({
     username: String,
     password: String,
     createdAt: {

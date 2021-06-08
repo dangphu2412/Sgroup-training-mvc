@@ -6,7 +6,7 @@ import methodOverride from 'method-override';
 import cookieParser from 'cookie-parser';
 
 import database from './config/database';
-import router from './router';
+import router from './core';
 import { envConfig } from "./env";
 
 const ROOT_DIR = process.cwd();
@@ -21,7 +21,7 @@ app.set('views', VIEW_PATH);
 app.use(cookieParser(envConfig.get('COOKIE_SECRET')));
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json());
-app.use(methodOverride(function (req: Request) {
+app.use(methodOverride(function (req: Request) {    
     if (req.body && typeof req.body === 'object' && '_method' in req.body) {
       // look in urlencoded POST bodies and delete it
       var method = req.body._method
