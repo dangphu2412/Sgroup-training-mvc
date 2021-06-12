@@ -1,13 +1,11 @@
-import { Request } from "express";
-
 export interface ILoginDto {
     email: string;
     password: string
 }
 
-export function LoginDto(req: Request): ILoginDto {
+export function LoginDto(body: any): ILoginDto {
     return {
-        email: req.body.email,
-        password: req.body.password
+        email: body.email,
+        password: body.password
     }
 }

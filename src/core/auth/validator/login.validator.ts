@@ -4,6 +4,10 @@ import { ILoginDto } from "../dto/login.dto";
 export function validateLogin(req: Request, res: Response, next: NextFunction) {
     const body: ILoginDto = req.body;
 
+    if (typeof req.query.case !== 'string') {
+        return res.send('Case is not formatted correctly');
+    }
+
     if (!body.email || !body?.email.match(/\S+@\S+\.\S+/)) {
         return res.send('Email is not formatted correctly');
     }

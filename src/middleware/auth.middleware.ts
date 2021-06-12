@@ -1,8 +1,7 @@
 import { NextFunction, Request, Response } from "express";
-import { SessionPayload } from "../dto/sessionPayload";
 import { envConfig } from "../env";
 
-import SessionModel from "../model/session";
+import SessionModel, { SessionPayload } from "../model/session";
 
 interface ExtendedRequestWithUser extends Request {
 	user?: SessionPayload
@@ -41,7 +40,7 @@ export const authRequired =  async (req: Request, res: Response, next: NextFunct
 		await SessionModel.updateOne({
 			_id: sessionId
 		}, {
-			renewTime: Date.now() + envConfig.get('SESSION_RENEW')
+			renewTime: Date.now() + Number.parseInt(envConfig.get('SESSION_RENEW'))
 		});
 	}
 
