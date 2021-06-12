@@ -41,7 +41,9 @@ export const authRequired =  async (req: Request, res: Response, next: NextFunct
 		await SessionModel.updateOne({
 			_id: sessionId
 		}, {
-			renewTime: Date.now() + envConfig.get('SESSION_RENEW')
+			$set: {
+				renewTime: Date.now() + Number.parseInt(envConfig.get('SESSION_RENEW'))
+			}
 		});
 	}
 

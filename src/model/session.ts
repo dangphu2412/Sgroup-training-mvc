@@ -1,6 +1,15 @@
-import { model, Schema } from 'mongoose';
+import { Document, model, Schema } from 'mongoose';
 
-const SessionSchema = new Schema({
+export interface ISessionSchema extends Document {
+    user: {
+        _id: string,
+        username: string
+    },
+    expired: number,
+    renewTime: number
+}
+
+const SessionSchema = new Schema<ISessionSchema>({
     user: {
         _id: String,
         username: String
@@ -9,6 +18,6 @@ const SessionSchema = new Schema({
     renewTime: Number // Check if user is no longer working in that session
 });
 
-const SessionModel = model('sessions', SessionSchema);
+const SessionModel = model<ISessionSchema>('sessions', SessionSchema);
 
 export default SessionModel;
