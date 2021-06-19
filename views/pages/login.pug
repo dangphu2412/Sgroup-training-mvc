@@ -1,13 +1,16 @@
 extends ../layout/main.pug
 
 block content
+    h2 Login
     form(action='/auth/login?case=0' method='post')
         .mb-3
             label.form-label(for='exampleInputEmail1') Email address
-            input.form-control(type='text' aria-describedby='emailHelp' name='email')
+            input.form-control(type='text' aria-describedby='emailHelp' name='username')
             #emailHelp.form-text We&apos;ll never share your email with anyone else.
         .mb-3
             label.form-label(for='exampleInputPassword1') Password
             input.form-control(type='password' name='password')
         button.btn.btn-primary(type='submit') Submit
+        button.btn.btn-warning(type='click')
+            a(href='/auth/register') Register
 

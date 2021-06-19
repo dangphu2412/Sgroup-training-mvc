@@ -8,7 +8,7 @@ export function validateLogin(req: Request, res: Response, next: NextFunction) {
         return res.send('Case is not formatted correctly');
     }
 
-    if (!body.email || !body?.email.match(/\S+@\S+\.\S+/)) {
+    if (!body.username || !body?.username.match(/\S+@\S+\.\S+/)) {
         return res.send('Email is not formatted correctly');
     }
 

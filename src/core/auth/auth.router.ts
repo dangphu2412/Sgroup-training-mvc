@@ -10,6 +10,10 @@ router.get('/login' , (req, res) => {
     return res.render('pages/login.pug')
 })
 
+router.get('/register', (req, res) => {
+    return res.render('pages/register.pug')
+})
+
 /**
  * Check if user exist and password matched
  * Fetch it out
@@ -18,6 +22,8 @@ router.get('/login' , (req, res) => {
  * If not lock -> expired -> delete the old and create new
  */
 router.post('/login', validateLogin, AuthController.login)
+
+router.post('/register', AuthController.register)
 
 router.get('/logout', async (req, res) => {
     console.log("Im logging out");
@@ -31,7 +37,7 @@ router.get('/logout', async (req, res) => {
         })
         return res.status(203).json({});
     }
-    return res.status(200).json({
+    return res.status(400).json({
         message: 'Can not logout'
     });
 })

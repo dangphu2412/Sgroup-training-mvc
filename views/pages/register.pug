@@ -1,0 +1,16 @@
+extends ../layout/main.pug
+
+block content
+    h2 Register
+    form#register
+        .mb-3
+            label.form-label(for='exampleInputEmail1') Email address
+            input#username.form-control(type='text' aria-describedby='emailHelp' name='username')
+            #emailHelp.form-text We&apos;ll never share your email with anyone else.
+        .mb-3
+            label.form-label(for='exampleInputPassword1') Password
+            input#password.form-control(type='password' name='password')
+        button.btn.btn-primary(type='submit') Create
+
+block scripts
+    script(src="/js/register.js") 

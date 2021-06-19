@@ -13,6 +13,20 @@ class Service implements AuthService {
     constructor(sessionService: SessionService) {
         this.sessionService = sessionService;
     }
+    async register(loginDto: ILoginDto): Promise<void> {
+        const user = await UserModel.findOne({
+            username: loginDto.username
+        });
+
+        if (user) {
+            throw new Error('This account has been used');
+        }
+
+        loginDto.password = bcrypt.hashSync(loginDto.password, 10);
+
+        await UserModel.create(loginDto);
+        return;
+    }
 
     loginUserCase(body: any,type: SocialCase): Promise<string | null> {
         switch (type) {
@@ -29,7 +43,7 @@ class Service implements AuthService {
 
     async loginDefault(loginDto: ILoginDto): Promise<string | null> {
         const user = await UserModel.findOne({
-            username: loginDto.email
+            username: loginDto.username
         });
 
         if (!user || !bcrypt.compareSync(loginDto.password, user.password)) {

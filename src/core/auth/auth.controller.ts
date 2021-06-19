@@ -42,6 +42,20 @@ class Controller {
             });
         }
     }
+
+    register = async (req: Request, res: Response) => {
+        try {
+            await this.authService.register(LoginDto(req.body));
+        } catch (error) {
+            return res.status(409).json({
+                message: error
+            });
+        }
+
+        return res.status(200).json({
+            message: 'Register success'
+        })
+    }
 }
 
 export const AuthController = new Controller(AuthServiceImpl);
