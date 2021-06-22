@@ -1,11 +1,11 @@
-import { SocialCase } from "../../enum/socialCase.enum";
-import UserModel from "../../model/user";
-import { AuthService } from "./api/authService";
-import { ILoginDto, LoginDto } from "./dto/login.dto";
+import {SocialCase} from '../../enum/socialCase.enum';
+import UserModel from '../../model/user';
+import {AuthService} from './api/authService';
+import {ILoginDto, LoginDto} from './dto/login.dto';
 import bcrypt from 'bcrypt';
-import { SessionService } from "../session/api/sessionService";
-import { SessionServiceImpl } from "../session/session.service";
-import { SessionPayload } from "../../model/session";
+import {SessionService} from '../session/api/sessionService';
+import {SessionServiceImpl} from '../session/session.service';
+import {SessionPayload} from '../../model/session';
 
 class Service implements AuthService {
     private sessionService: SessionService;
@@ -13,6 +13,7 @@ class Service implements AuthService {
     constructor(sessionService: SessionService) {
         this.sessionService = sessionService;
     }
+
     async register(loginDto: ILoginDto): Promise<void> {
         const user = await UserModel.findOne({
             username: loginDto.username
@@ -28,7 +29,7 @@ class Service implements AuthService {
         return;
     }
 
-    loginUserCase(body: any,type: SocialCase): Promise<string | null> {
+    loginUserCase(body: any, type: SocialCase): Promise<string | null> {
         switch (type) {
             case SocialCase.DEFAULT:
                 return this.loginDefault(body);
@@ -36,7 +37,7 @@ class Service implements AuthService {
             case SocialCase.GOOGLE:
             case SocialCase.TWITTER:
             default:
-                throw new Error("Method not supported.");
+                throw new Error('Method not supported.');
 
         }
     }
@@ -59,8 +60,8 @@ class Service implements AuthService {
 
         // Tao moi 1 session cho minh
         if (!currentUserSession) {
-            console.log("Creating new session");
-            
+            console.log('Creating new session');
+
             const session = await this.sessionService.create(userInfomation);
             return session._id;
         }

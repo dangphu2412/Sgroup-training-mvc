@@ -1,5 +1,5 @@
-import { model, Schema } from 'mongoose';
-import { updateHook } from './hooks/updateHook';
+import {model, Schema} from 'mongoose';
+import {updateHook} from './hooks/updateHook';
 
 const ArticleSchema = new Schema({
     title: String,

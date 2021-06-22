@@ -1,7 +1,7 @@
-import { Query } from "mongoose";
-import { envConfig } from "../../env";
-import SessionModel, { ISessionSchema, SessionPayload } from "../../model/session";
-import { SessionService } from "./api/sessionService";
+import {Query} from 'mongoose';
+import {envConfig} from '../../env';
+import SessionModel, {ISessionSchema, SessionPayload} from '../../model/session';
+import {SessionService} from './api/sessionService';
 
 class Service implements SessionService {
     create(user: SessionPayload) {
@@ -11,11 +11,13 @@ class Service implements SessionService {
             renewTime: Date.now() + envConfig.get('SESSION_RENEW')
         });
     }
-    findByUserId(userId: string): Query<ISessionSchema | null, ISessionSchema, {}> {
+
+    findByUserId(userId: string): Query<ISessionSchema | null, ISessionSchema, Record<string, unknown>> {
         return SessionModel.findOne({
             'user._id': userId
         })
     }
+
     async delete(userId: string): Promise<void> {
         await SessionModel.deleteOne({
             'user._id': userId

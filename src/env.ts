@@ -2,6 +2,7 @@ import 'dotenv/config';
 
 class EnvConfig {
     private config = {} as any;
+
     set(key: string, value?: string, defaultVal?: any): void {
         if (defaultVal) {
             this.config[key] = value || defaultVal;
@@ -9,6 +10,7 @@ class EnvConfig {
             this.config[key] = value;
         }
     }
+
     get(key: string): string {
         if (!this.config[key]) {
             throw new Error(`Can not get key ${key} from environment`);
@@ -25,4 +27,4 @@ envConfig.set('COOKIE_SECRET', process.env.COOKIE_SECRET);
 envConfig.set('SESSION_EXPIRED', process.env.SESSION_EXPIRED, 1000 * 60 * 2);
 envConfig.set('SESSION_RENEW', process.env.SESSION_RENEW, 1000 * 30);
 
-export { envConfig };
+export {envConfig};

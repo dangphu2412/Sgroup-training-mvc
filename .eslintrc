@@ -1,0 +1,87 @@
+{
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "project": "tsconfig.json",
+      "sourceType": "module"
+    },
+    "plugins": [
+      "@typescript-eslint/eslint-plugin",
+      "only-warn"
+    ],
+    "extends": [
+      "plugin:@typescript-eslint/eslint-recommended",
+      "plugin:@typescript-eslint/recommended",
+      "prettier",
+      "prettier/@typescript-eslint"
+    ],
+    "root": true,
+    "env": {
+      "node": true,
+      "jest": true
+    },
+    "rules": {
+      "import/no-extraneous-dependencies": 0,
+      "import/prefer-default-export": 0,
+      "class-methods-use-this": 0,
+      "import/no-cycle": 0,
+      "@typescript-eslint/explicit-module-boundary-types": "off",
+      "@typescript-eslint/interface-name-prefix": "off",
+      "@typescript-eslint/explicit-function-return-type": "off",
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/no-empty-interface": "off",
+      "indent": [
+        "error",
+        4,
+        {
+          "SwitchCase": 1
+        }
+      ],
+      "eol-last": [
+        "error",
+        "always"
+      ],
+      "lines-between-class-members": [
+        "error",
+        "always"
+      ],
+      "comma-dangle": [
+        "error",
+        "never"
+      ],
+      "@typescript-eslint/quotes": [
+        "warn",
+        "single"
+      ],
+      "key-spacing": [
+        "warn",
+        {
+          "beforeColon": false
+        }
+      ],
+      "space-infix-ops": [
+        "error",
+        {
+          "int32Hint": false
+        }
+      ],
+      "no-irregular-whitespace": 1,
+      "no-multi-spaces": 1,
+      "no-multiple-empty-lines": 1,
+      "no-trailing-spaces": 1,
+      "comma-spacing": 1,
+      "array-bracket-spacing": 1,
+      "object-curly-spacing": 1,
+      "max-len": [
+        "error",
+        {
+          "code": 100,
+          "ignoreRegExpLiterals": true
+        }
+      ],
+      "arrow-parens": [
+        "error",
+        "as-needed"
+      ],
+      "no-console": "error"
+    }
+}

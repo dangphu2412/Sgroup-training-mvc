@@ -1,10 +1,9 @@
-import { Request, Response } from "express";
+import {Request, Response} from 'express';
 import slug from 'slugify';
 import Article from '../../model/article';
 
 class Controller {
-    getOne = (req: Request, res: Response) => {
-    }
+    getOne = (req: Request, res: Response) => {}
 
     create = async (req: Request, res: Response) => {
         let createSuccess = true;
@@ -31,16 +30,16 @@ class Controller {
     updateBySlug = async (req: Request, res: Response) => {
         const {slug} = req.params;
 
-        const article = await Article.findOne({ slug });
+        const article = await Article.findOne({slug});
 
         if (!article) {
             return res.render('pages/error.pug', {
                 error: `This article with title ${slug} is not exist`
             });
         }
-        
+
         try {
-            await Article.updateOne({ slug }, req.body);
+            await Article.updateOne({slug}, req.body);
         } catch (error) {
             console.log(error);
             return res.render('pages/error.pug', {
@@ -54,16 +53,16 @@ class Controller {
     deleteBySlug = async (req: Request, res: Response) => {
         const {slug} = req.params;
 
-        const article = await Article.findOne({ slug });
+        const article = await Article.findOne({slug});
 
         if (!article) {
             return res.render('pages/error.pug', {
                 error: `This article with title ${slug} is not exist`
             });
         }
-        
+
         try {
-            await Article.deleteOne({slug });
+            await Article.deleteOne({slug});
         } catch (error) {
             console.log(error);
             return res.render('pages/error.pug', {

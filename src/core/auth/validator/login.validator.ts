@@ -1,5 +1,5 @@
-import { NextFunction, Request, Response } from "express";
-import { ILoginDto } from "../dto/login.dto";
+import {NextFunction, Request, Response} from 'express';
+import {ILoginDto} from '../dto/login.dto';
 
 export function validateLogin(req: Request, res: Response, next: NextFunction) {
     const body: ILoginDto = req.body;
@@ -24,7 +24,7 @@ export function validateLogin(req: Request, res: Response, next: NextFunction) {
     //         validate(body.password, /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/, 'Wrong password format')
     //     ])
     //     return res.send(err)
-    
+
     // } catch(err) {
     //     return next();
 

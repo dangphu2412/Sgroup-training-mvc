@@ -1,5 +1,5 @@
-import { Document, model, Schema } from 'mongoose';
-import { updateHook } from './hooks/updateHook';
+import {Document, model, Schema} from 'mongoose';
+import {updateHook} from './hooks/updateHook';
 
 export interface IUserSchema extends Document {
     username: string,

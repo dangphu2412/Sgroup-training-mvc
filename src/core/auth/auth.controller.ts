@@ -1,9 +1,9 @@
-import { Request, Response } from "express";
+import {Request, Response} from 'express';
 
-import { envConfig } from '../../env';
-import { AuthServiceImpl } from "./auth.service";
-import { AuthService } from "./api/authService";
-import { LoginDto } from "./dto/login.dto";
+import {envConfig} from '../../env';
+import {AuthServiceImpl} from './auth.service';
+import {AuthService} from './api/authService';
+import {LoginDto} from './dto/login.dto';
 
 /**
  * Lam nhiem vu phan tich data tu request

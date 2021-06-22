@@ -1,6 +1,6 @@
 import express from 'express';
 import Article from '../../model/article';
-import { ArticleController } from './article.controller';
+import {ArticleController} from './article.controller';
 
 const router = express.Router();
 
@@ -16,8 +16,8 @@ router.get('/new', (req, res, next) => {
 })
 
 router.get('/:slug/update', async (req, res, next) => {
-    const { slug } = req.params;
-    const article = await Article.findOne({ slug });
+    const {slug} = req.params;
+    const article = await Article.findOne({slug});
     if (!article) {
         return res.render('pages/error.pug', {
             error: 'Not found article with title ' + slug
@@ -29,8 +29,8 @@ router.get('/:slug/update', async (req, res, next) => {
 })
 
 router.get('/:slug', async (req, res) => {
-    const { slug } = req.params;
-    const article = await Article.findOne({ slug });
+    const {slug} = req.params;
+    const article = await Article.findOne({slug});
     if (!article) {
         return res.render('pages/error.pug', {
             error: 'Not found article with title ' + slug
