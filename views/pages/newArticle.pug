@@ -12,8 +12,8 @@ block content
         .form-group.my-3
             label.form-label(for='formFileMultiple') Thumbnail
             input#upload.form-control(type='file')
-        img(src="", alt="")
-        button.btn.btn-primary(type='submit') Create
+        img#previewImg(style="max-height: 300px" src="#", alt="")
+        button.my-3.d-block.btn.btn-primary(type='submit') Create
 
 block scripts
     script(src='/js/article.js')
