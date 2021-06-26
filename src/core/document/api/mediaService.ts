@@ -1,9 +1,9 @@
 export interface MediaService {
-    uploadOne(file?: Express.Multer.File): string;
+    uploadOne(file?: Express.Multer.File): Promise<string>;
 
-    uploadMany(files?: Array<Express.Multer.File>): Array<string>
+    uploadMany(files?: Array<Express.Multer.File>): Promise<Array<string>>
 
-    deleteOne(file?: Express.Multer.File): string;
+    deleteOne(file?: Express.Multer.File): Promise<string>;
 
-    deleteMany(files?: Array<Express.Multer.File>): Array<string>
+    deleteMany(files?: Array<Express.Multer.File>): Promise<Array<string>>
 }

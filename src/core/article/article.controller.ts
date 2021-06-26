@@ -3,8 +3,6 @@ import slug from 'slugify';
 import Article from '../../model/article';
 
 class Controller {
-    getOne = (req: Request, res: Response) => {}
-
     create = async (req: Request, res: Response) => {
         let createSuccess = true;
         const articleExisted = await Article.findOne({title: req.body.title});

@@ -2,6 +2,7 @@ import 'dotenv/config';
 
 class EnvConfig {
     private config: Record<string, any> = {};
+
     set(key: string, value?: string, defaultVal?: any): void {
         if (defaultVal) {
             this.config[key] = value || defaultVal;

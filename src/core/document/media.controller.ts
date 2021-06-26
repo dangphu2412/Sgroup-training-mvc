@@ -1,6 +1,6 @@
 import {Request, Response} from 'express-serve-static-core';
-import { MediaService } from './api/mediaService';
-import { MediaServiceImpl } from './media.service';
+import {MediaService} from './api/mediaService';
+import {MediaServiceImpl} from './media.service';
 
 class Controlelr {
     private mediaService: MediaService;
@@ -9,8 +9,8 @@ class Controlelr {
         this.mediaService = mediaService;
     }
 
-    uploadOne = (req: Request, res: Response) => {
-        const src = this.mediaService.uploadOne(req.file);
+    uploadOne = async (req: Request, res: Response) => {
+        const src = await this.mediaService.uploadOne(req.file);
 
         return res.status(200).json({
             src

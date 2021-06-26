@@ -1,6 +1,5 @@
 document.getElementById('upload').addEventListener('change', async function(e) {
     const previewImg = document.getElementById('previewImg');
-    previewImg.src = URL.createObjectURL(this.files[0]);
     const form = new FormData();
     form.append('file', this.files[0])
     console.log(e);
@@ -14,7 +13,7 @@ document.getElementById('upload').addEventListener('change', async function(e) {
         alert('Upload failed')
     } else {
         const {src} = await response.json();
-        alert(src);
+        previewImg.src = src;
         return;
     }
 })
