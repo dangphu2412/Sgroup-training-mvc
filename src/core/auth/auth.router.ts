@@ -26,10 +26,7 @@ router.post('/login', validateLogin, AuthController.login)
 router.post('/register', AuthController.register)
 
 router.get('/logout', async (req, res) => {
-    console.log('Im logging out');
-
     const {sessionId} = req.signedCookies;
-    console.log(sessionId);
 
     if (sessionId) {
         await SessionModel.deleteOne({
