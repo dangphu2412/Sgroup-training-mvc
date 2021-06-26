@@ -5,7 +5,7 @@ import {join} from 'path';
 import methodOverride from 'method-override';
 import cookieParser from 'cookie-parser';
 
-import database from './config/database';
+import database from './config/database.config';
 import router from './core';
 import {envConfig} from './env';
 

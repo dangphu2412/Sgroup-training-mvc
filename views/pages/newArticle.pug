@@ -9,11 +9,11 @@ block content
         .form-group
             label Content
             textarea#content.form-control(rows='3' name='content')
-        .form-group
-            label Thumbnail
-            input(type='file' name='thumbnail')
+        .form-group.my-3
+            label.form-label(for='formFileMultiple') Thumbnail
+            input#upload.form-control(type='file')
+        img(src="", alt="")
         button.btn.btn-primary(type='submit') Create
-
 
 block scripts
     script(src='/js/article.js')
