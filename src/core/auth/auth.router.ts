@@ -21,7 +21,7 @@ router.get('/register', (req, res) => {
  * If have -> check lock -> not login
  * If not lock -> expired -> delete the old and create new
  */
-router.post('/login', validateLogin, AuthController.login)
+router.post('/login', validateLogin, AuthController.loginWithoutSession)
 
 router.post('/register', AuthController.register)
 

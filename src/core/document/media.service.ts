@@ -19,7 +19,6 @@ class Service implements MediaService {
         const response = await cloudinary.upload(file.path, {
             folder: '/test'
         })
-        console.log(response);
 
         unlinkSync(file.path);
         return response.secure_url;

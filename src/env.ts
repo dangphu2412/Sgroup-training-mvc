@@ -26,6 +26,8 @@ envConfig.set('DB_CONNECTION', process.env.DB_CONNECTION);
 envConfig.set('COOKIE_SECRET', process.env.COOKIE_SECRET);
 envConfig.set('SESSION_EXPIRED', process.env.SESSION_EXPIRED, 1000 * 60 * 2);
 envConfig.set('SESSION_RENEW', process.env.SESSION_RENEW, 1000 * 30);
+envConfig.set('JWT_SECRET', process.env.JWT_SECRET, 'FusProcute123@@');
+
 envConfig.set('CLOUDINARY_API_KEY', process.env.CLOUDINARY_API_KEY);
 envConfig.set('CLOUDINARY_API_SECRET', process.env.CLOUDINARY_API_SECRET);
 envConfig.set('CLOUDINARY_NAME', process.env.CLOUDINARY_NAME);

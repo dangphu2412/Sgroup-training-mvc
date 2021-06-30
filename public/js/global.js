@@ -1,3 +1,10 @@
+const currentUserState = localStorage.getItem('user');
+
+if(!currentUserState) {
+    location.href = '/auth/login'
+}
+
+
 document.getElementById('logout').addEventListener('click', async function(event) {
     event.preventDefault();
     const url = 'http://localhost:3000/auth/logout';

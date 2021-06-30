@@ -1,6 +1,6 @@
 export enum SocialCase {
-    DEFAULT,
-    GOOGLE,
-    FACEBOOK,
-    TWITTER
+    DEFAULT = 'DEFAULT',
+    GOOGLE = 'GOOGLE',
+    FACEBOOK = 'FACEBOOK',
+    TWITTER = 'TWITTER'
 }
