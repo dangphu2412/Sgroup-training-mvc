@@ -2,6 +2,7 @@ import {Document, model, Schema} from 'mongoose';
 import {updateHook} from './hooks/updateHook';
 
 export interface IUserSchema extends Document {
+    _id: string,
     username: string,
     password: string,
     createdAt: Date,

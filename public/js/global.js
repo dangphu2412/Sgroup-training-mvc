@@ -1,24 +1,4 @@
-const currentUserState = localStorage.getItem('user');
-
-if(!currentUserState) {
-    location.href = '/auth/login'
-}
-
-
 document.getElementById('logout').addEventListener('click', async function(event) {
-    event.preventDefault();
-    const url = 'http://localhost:3000/auth/logout';
-    const deleteMethod = {
-        method: 'GET', // Method itself
-        headers: {
-            'Accept': 'application/json, text/plain, */*',
-            'Content-Type': 'application/json'
-        }
-    }
-    try {
-        await (await fetch(url, deleteMethod)).json();
-    } catch (error) {
-        alert(error);
-    }
+    localStorage.removeItem('user')
     location.href = '/auth/login'
 })

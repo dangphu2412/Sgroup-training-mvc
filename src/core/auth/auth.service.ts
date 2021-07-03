@@ -9,6 +9,7 @@ import {SessionPayload} from '../../model/session';
 import {IUserInfo, UserInfo} from './dto/userInfo.dto';
 import jwt from 'jsonwebtoken';
 import {envConfig} from '../../env';
+import {JwtAuthContext} from './guard/jwtAutheticator.guard';
 
 class Service implements AuthService {
     private sessionService: SessionService;
@@ -60,7 +61,10 @@ class Service implements AuthService {
 
         return {
             info,
-            accessToken: jwt.sign({_id: info._id}, envConfig.get('JWT_SECRET'))
+            accessToken: jwt.sign({
+                _id: info._id,
+                roles: []
+            } as JwtAuthContext, envConfig.get('JWT_SECRET'))
         }
     }
 

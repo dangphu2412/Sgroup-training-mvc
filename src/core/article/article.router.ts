@@ -1,10 +1,11 @@
 import express from 'express';
 import Article from '../../model/article';
+import {JwtAuthenticator} from '../auth/guard/jwtAutheticator.guard';
 import {ArticleController} from './article.controller';
 
 const router = express.Router();
 
-router.post('/', ArticleController.create);
+router.post('/', JwtAuthenticator.getInstance().getAuthenticator, ArticleController.create);
 
 router.put('/:slug', ArticleController.updateBySlug);
 

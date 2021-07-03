@@ -1,10 +1,23 @@
-import {model, Schema} from 'mongoose';
+import {model, Schema, Types} from 'mongoose';
 import {updateHook} from './hooks/updateHook';
 
-const ArticleSchema = new Schema({
+export interface IArticle {
+    title: string
+    content: string
+    slug: string
+    user: Types.ObjectId
+    createdAt: Date
+    updatedAt: Date
+}
+
+const ArticleSchema = new Schema<IArticle>({
     title: String,
     content: String,
     slug: String,
+    user: {
+        ref: 'users',
+        type: Types.ObjectId
+    },
     createdAt: {
         type: Date
     },

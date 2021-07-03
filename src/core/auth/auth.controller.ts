@@ -4,7 +4,7 @@ import {envConfig} from '../../env';
 import {AuthServiceImpl} from './auth.service';
 import {AuthService} from './api/authService';
 import {LoginDto} from './dto/login.dto';
-import { SocialCase } from 'src/enum/socialCase.enum';
+import {SocialCase} from 'src/enum/socialCase.enum';
 
 /**
  * Lam nhiem vu phan tich data tu request

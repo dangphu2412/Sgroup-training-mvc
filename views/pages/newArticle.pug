@@ -1,7 +1,7 @@
 extends ../layout/main.pug
 
 block content
-    form(action="/articles", method="post")
+    form#newFormCreation
         .form-group
             label.form-label Title
             input#title.form-control(type='text' name='title' aria-describedby='emailHelp')
@@ -16,4 +16,5 @@ block content
         button.my-3.d-block.btn.btn-primary(type='submit') Create
 
 block scripts
+    script(src='/js/private.js')
     script(src='/js/article.js')

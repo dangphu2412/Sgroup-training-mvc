@@ -3,7 +3,7 @@ import {envConfig} from '../env';
 
 import SessionModel, {SessionPayload} from '../model/session';
 
-interface ExtendedRequestWithUser extends Request {
+export interface ExtendedRequestWithUser extends Request {
 	user?: SessionPayload
 };
 

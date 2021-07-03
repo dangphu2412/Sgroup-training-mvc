@@ -22,7 +22,7 @@ document.querySelector('#login').addEventListener('submit', async function(event
     } else {
         const {data} = await response.json();
 
-        localStorage.setItem('user', data);
+        localStorage.setItem('user', JSON.stringify(data));
 
         alert('Login success')
         location.href = '/';
