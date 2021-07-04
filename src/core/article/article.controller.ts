@@ -1,43 +1,30 @@
 import {Request, Response} from 'express';
-import slug from 'slugify';
 import Article from '../../model/article';
 import {AuthenticatedRequest} from '../auth/guard/jwtAutheticator.guard';
-import UserModel from '../../model/user';
-import {Types} from 'mongoose';
+import {ArticleServiceImpl} from './article.service';
+import {ArticleService} from './api/articleService';
+import {NewArticleDto} from './dto/newArticle.dto';
 
 class Controller {
+    private service: ArticleService;
+
+    constructor(service: ArticleService) {
+        this.service = service;
+    }
+
     create = async (req: Request, res: Response) => {
-        const articleExisted = await Article.findOne({title: req.body.title});
-
         try {
-            if (articleExisted) {
-                throw Error('This article existed');
-            }
-
-            req.body.slug = slug(req.body.title);
-
-            const user = await UserModel.findOne({
-                _id: (req as AuthenticatedRequest)['user']['_id']
-            })
-
-            if (!user) {
-                throw new Error('User is not acceptable')
-            }
-
-            req.body.user = user._id;
-
-            await Article.create(req.body);
+            await this.service.createOne(
+                (req as AuthenticatedRequest)['user']['_id'],
+                NewArticleDto(req.body)
+            )
+            return res.status(203).json();
         } catch (error) {
             return res.status(400).json({
                 message: error.message,
                 stack: error.stack
             })
         }
-
-
-        return res.status(201).json({
-            message: 'Ok create success'
-        })
     }
 
     updateBySlug = async (req: Request, res: Response) => {
@@ -87,4 +74,4 @@ class Controller {
     }
 }
 
-export const ArticleController = new Controller();
+export const ArticleController = new Controller(ArticleServiceImpl);

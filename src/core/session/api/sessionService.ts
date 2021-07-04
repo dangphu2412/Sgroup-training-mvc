@@ -1,8 +1,7 @@
-import {Query} from 'mongoose';
-import {ISessionSchema, SessionPayload} from '../../../model/session';
+import {SessionPayload} from '../../../model/session';
 
 export interface SessionService {
-    findByUserId(userId: string): Query<ISessionSchema | null, ISessionSchema, Record<string, unknown>>;
+    findByUserId(userId: string): any;
     create(user: SessionPayload): any;
     delete(userId: string): Promise<void>;
 }

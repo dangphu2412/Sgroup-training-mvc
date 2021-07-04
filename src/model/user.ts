@@ -1,12 +1,11 @@
-import {Document, model, Schema} from 'mongoose';
+import {model, Schema} from 'mongoose';
 import {updateHook} from './hooks/updateHook';
 
-export interface IUserSchema extends Document {
-    _id: string,
+export interface IUserSchema {
     username: string,
     password: string,
-    createdAt: Date,
-    updatedAt: Date
+    createdAt?: Date,
+    updatedAt?: Date
 }
 
 const UserSchema = new Schema<IUserSchema>({

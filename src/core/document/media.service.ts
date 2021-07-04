@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {MediaService} from './api/mediaService';
 import {unlinkSync} from 'fs';
 import {cloudinary} from '../../config/cloudinary.config';

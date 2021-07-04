@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 

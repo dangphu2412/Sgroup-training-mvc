@@ -6,8 +6,8 @@ export interface IArticle {
     content: string
     slug: string
     user: Types.ObjectId
-    createdAt: Date
-    updatedAt: Date
+    createdAt?: Date
+    updatedAt?: Date
 }
 
 const ArticleSchema = new Schema<IArticle>({

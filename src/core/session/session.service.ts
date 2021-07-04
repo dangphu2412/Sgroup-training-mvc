@@ -1,6 +1,5 @@
-import {Query} from 'mongoose';
 import {envConfig} from '../../env';
-import SessionModel, {ISessionSchema, SessionPayload} from '../../model/session';
+import SessionModel, {SessionPayload} from '../../model/session';
 import {SessionService} from './api/sessionService';
 
 class Service implements SessionService {
@@ -12,7 +11,7 @@ class Service implements SessionService {
         });
     }
 
-    findByUserId(userId: string): Query<ISessionSchema | null, ISessionSchema, Record<string, unknown>> {
+    findByUserId(userId: string) {
         return SessionModel.findOne({
             'user._id': userId
         })

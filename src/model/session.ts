@@ -1,11 +1,11 @@
-import {Document, model, Schema} from 'mongoose';
+import {model, Schema} from 'mongoose';
 
 export interface SessionPayload {
 	_id: string;
 	username: string;
 }
 
-export interface ISessionSchema extends Document {
+export interface ISessionSchema {
     user: SessionPayload,
     expired: number, // Use logout when expired comes
     renewTime: number
