@@ -24,7 +24,7 @@ document.getElementById('newFormCreation').addEventListener('submit', async func
     const title = document.getElementById('title').value;
     const content = document.getElementById('content').value;
     const user = localStorage.getItem('user');
-
+    const thumbnail = document.getElementById('previewImg').src
     if (!user) {
         alert('Your current login is out of date')
     }
@@ -38,7 +38,8 @@ document.getElementById('newFormCreation').addEventListener('submit', async func
         },
         body: JSON.stringify({
             title,
-            content
+            content,
+            thumbnail
         })
     })
 

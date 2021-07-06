@@ -1,3 +1,4 @@
+import { ParsedQs } from 'qs';
 import slugify from 'slugify';
 import ArticleModel from '../../model/article';
 import UserModel from '../../model/user';
@@ -33,6 +34,20 @@ class Service implements ArticleService {
         );
     }
 
+    getAll(query: ParsedQs): Promise<any> {
+        console.log(query);
+        
+        return ArticleModel.find({
+            $or: [
+                {
+                    title: {
+                        $regex: query.q,
+                        $options: 'i'
+                    }
+                }
+            ]
+        });
+    }
 }
 
 export const ArticleServiceImpl = new Service(ArticleMapperImpl);

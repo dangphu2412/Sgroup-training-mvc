@@ -5,6 +5,8 @@ import {ArticleController} from './article.controller';
 
 const router = express.Router();
 
+router.get('/', ArticleController.getAll)
+
 router.post('/', JwtAuthenticator.getInstance().getAuthenticator, ArticleController.create);
 
 router.put('/:slug', ArticleController.updateBySlug);

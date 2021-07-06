@@ -12,6 +12,13 @@ class Controller {
         this.service = service;
     }
 
+    getAll = async (req: Request, res: Response) => {
+        const data = await this.service.getAll(req.query)
+        return res.render('pages/home.pug', {
+            articles: data
+        });
+    }
+
     create = async (req: Request, res: Response) => {
         try {
             await this.service.createOne(

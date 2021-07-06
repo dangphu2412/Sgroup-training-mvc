@@ -5,6 +5,7 @@ export interface IArticle {
     title: string
     content: string
     slug: string
+    thumbnail: string,
     user: Types.ObjectId
     createdAt?: Date
     updatedAt?: Date
@@ -14,6 +15,7 @@ const ArticleSchema = new Schema<IArticle>({
     title: String,
     content: String,
     slug: String,
+    thumbnail: String,
     user: {
         ref: 'users',
         type: Types.ObjectId

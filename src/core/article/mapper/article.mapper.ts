@@ -9,7 +9,8 @@ class Mapper implements ArticleMapper {
             title: dto.title,
             slug,
             content: dto.content,
-            user: userId
+            user: userId,
+            thumbnail: dto.thumbnail
         }
     }
 
