@@ -1,16 +1,20 @@
-/* eslint-disable max-len */
 import mongoose from 'mongoose';
 import {envConfig} from '../env';
 
-export default async () => {
+async function runRollback() {
     try {
+
         await mongoose.connect(envConfig.get('DB_CONNECTION'), {
             useNewUrlParser: true,
             useUnifiedTopology: true
         });
-        console.log('Connected to mongodb')
+        await mongoose.connection.dropDatabase()
     } catch (error) {
-        console.log(error);
-        process.exit(1);
+        console.log(error)
+        process.exit(1)
     }
 }
+
+runRollback()
+    .then(() => {console.log('Rollback database')})
+    .finally(() => {process.exit(0)})
